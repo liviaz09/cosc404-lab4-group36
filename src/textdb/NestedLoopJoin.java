@@ -31,7 +31,8 @@ public class NestedLoopJoin extends Operator
 
 		// TODO: YOUR SETUP CODE HERE
 		// Read first tuple of left input
-		
+		tupleLeft = input[0].next();
+
 	}
 
 
@@ -40,11 +41,20 @@ public class NestedLoopJoin extends Operator
 		// TODO
 		// Implement next() portion of iterator to return the next joined tuple
 		// Use boolean to determine if tupleLeft joins with tupleRight with pred.isEqual(tupleLeft,tupleRight)
+		do{
+			tupleRight = input[1].next();
+			if(tupleRight == null){
+				input[1].close();
+				tupleLeft = input[0].next();
+				if(tupleLeft == null){
+					return null;
+				}
+				input[1].init();
+				tupleRight = input[1].next();
+			}
+		}while(!pred.isEqual(tupleLeft, tupleRight));
 
-		// return outputJoinTuple(tupleLeft, tupleRight);
-		return null;
-
-
+		return outputJoinTuple(tupleLeft, tupleRight);
 	}
 
 	public void close() throws IOException
