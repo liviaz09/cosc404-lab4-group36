@@ -31,6 +31,7 @@ public class NestedLoopJoin extends Operator
 
 		// TODO: YOUR SETUP CODE HERE
 		// Read first tuple of left input
+		
 	}
 
 
