@@ -25,6 +25,11 @@ public class MergeJoin extends Operator {
 		setOutputRelation(out);
 
 		// TODO: YOUR SETUP CODE HERE
+		//firstly calculate the size of each buffer with respect to the number of attributes
+		int size = MERGE_BUFFER_SIZE/ out.getNumAttributes();
+		// calculate the left buffer
+		Tuple leftBuff = new Tuple(input[0].next());
+		Tuple rightBuff = new Tuple(input[1].next());	
 	}
 
 	public Tuple next() throws IOException {
