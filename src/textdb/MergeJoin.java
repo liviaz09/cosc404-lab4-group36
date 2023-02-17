@@ -36,11 +36,13 @@ public class MergeJoin extends Operator {
         while(tupleLeft != null){
             tupleRight = input[1].next();
             while(tupleRight !=null){
-                if(pred.isEqual(tupleLeft, tupleRight))
+                if(pred.isEqual(tupleLeft, tupleRight)){
                   outputJoinTuple(tupleLeft, tupleRight);
+				}
+					 tupleRight= input[1].next();
             }
 			input[1].init();
-			tupleRight = input[1].next();
+			tupleLeft = input[0].next();
         }
         return null;
 }
