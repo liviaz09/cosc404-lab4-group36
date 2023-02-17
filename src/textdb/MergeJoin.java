@@ -25,17 +25,28 @@ public class MergeJoin extends Operator {
 		setOutputRelation(out);
 
 		// TODO: YOUR SETUP CODE HERE
-		//firstly calculate the size of each buffer with respect to the number of attributes
-		int size = MERGE_BUFFER_SIZE/ out.getNumAttributes();
-		// calculate the left buffer
-		Tuple leftBuff = new Tuple(input[0].next());
-		Tuple rightBuff = new Tuple(input[1].next());	
+		Tuple leftBuff = input[0].next();
+		Tuple rightBuff = input[1].next();	
 	}
 
 	public Tuple next() throws IOException {
-		// TODO
+
+		// TODO: YOUR SETUP CODE HERE
+		Tuple leftBuff = input[0].next();
+		Tuple rightBuff = input[1].next();
+		// check if we have moved through all the tuples in a relation
+		while(leftBuff != null && rightBuff !=null){
+			
+		if(pred.isEqual(leftBuff, rightBuff)){
+		outputJoinTuple(leftBuff, rightBuff);
+		return outputJoinTuple(leftBuff, rightBuff);
+		}
+		else{
+			return null;
+		}
+	}
+		return rightBuff;// to fix error should not return right tuple
 		
-		return null;
 	}
 
 	public void close() throws IOException {
